@@ -10,6 +10,9 @@ jobs:
   backend:
     name: Backend Build & Migrations
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql+asyncpg://user:password@localhost:5432/sarendb
+
     services:
       postgres:
         image: postgres:15-alpine
@@ -65,6 +68,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+
       - name: Install Frontend Dependencies
         working-directory: frontend
         run: npm ci
